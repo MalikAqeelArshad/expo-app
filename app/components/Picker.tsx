@@ -6,6 +6,8 @@ import {
    Modal,
    TouchableOpacity,
    TouchableWithoutFeedback,
+   ViewStyle,
+   StyleProp,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -14,7 +16,28 @@ import Input from "./Input";
 import Screen from "./Screen";
 import { ListItem, ListItemSeparator } from "./lists";
 
-const Picker = ({
+interface PickerItem {
+   id: number | string;
+   title: string;
+}
+
+interface PickerProps {
+   icon?: keyof typeof MaterialCommunityIcons.glyphMap;
+   size?: number;
+   iconColor?: string;
+   iconBackground?: string;
+   color?: string;
+   background?: string;
+   rounded?: boolean | number;
+   placeholder?: string;
+   rightIcon?: keyof typeof MaterialCommunityIcons.glyphMap | false;
+   rightIconColor?: string;
+   items?: PickerItem[];
+   style?: StyleProp<ViewStyle>;
+   modalStyle?: StyleProp<ViewStyle>;
+}
+
+const Picker: React.FC<PickerProps> = ({
    icon,
    size = 25,
    iconColor,
@@ -46,7 +69,7 @@ const Picker = ({
                   background={background}
                   rounded={rounded}
                   onPress={() => setModalVisible(true)}
-                  style={{ paddingRight: 15, ...style }}
+                  style={{ paddingRight: 15, ...(style as object) }}
                />
                {rightIcon !== false && (
                   <View style={styles.iconView}>

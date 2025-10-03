@@ -1,4 +1,8 @@
-export default {
+type ColorsType = {
+   [key: string]: string;
+};
+
+const COLORS: ColorsType = {
    transparent: "transparent",
    bgColor: "#f8f4f4",
    primary: "#fc5c65",
@@ -17,3 +21,5 @@ export default {
    orange: "#ffa500",
    yellow: "#ffd700",
 };
+
+export default COLORS;

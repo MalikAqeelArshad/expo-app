@@ -1,9 +1,28 @@
-import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
+import {
+   View,
+   StyleSheet,
+   Image,
+   TouchableHighlight,
+   ImageSourcePropType,
+   GestureResponderEvent,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 // import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import Text from "../Text";
 import COLORS from "../../config/colors";
+
+type ListItemProps = {
+   title?: string,
+   subTitle?: string,
+   image?: ImageSourcePropType,
+   IconComponent?: React.ReactNode,
+   onPress?: (event: GestureResponderEvent) => void,
+   chevron?: boolean,
+   titleLines?: number,
+   subTitleLines?: number,
+   renderRightActions?: () => React.ReactNode,
+};
 
 function ListItem({
    title,
@@ -15,7 +34,7 @@ function ListItem({
    titleLines = 1,
    subTitleLines = 2,
    renderRightActions,
-}) {
+}: ListItemProps) {
    return (
       // <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={COLORS.medium} onPress={onPress}>

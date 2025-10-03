@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Switch, Text } from "react-native";
+import { View, Switch, Text, SwitchProps } from "react-native";
 
-const AppSwitch = ({ ...otherProps }) => {
+type AppSwitchProps = SwitchProps;
+
+const AppSwitch: React.FC<AppSwitchProps> = ({ ...otherProps }) => {
    const [isEnabled, setIsEnabled] = useState(false);
    const toggleSwitch = () => setIsEnabled(!isEnabled);
 

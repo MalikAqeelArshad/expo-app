@@ -1,12 +1,17 @@
+import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
 
 import Screen from "../components/Screen";
 import Button from "../components/Button";
 import Text from "../components/Text";
 
-import Styles from "../config/styles";
+import { STYLES } from "../config/styles";
 
-function WelcomeScreen({ onPress }) {
+type Props = {
+   onPress: (page: number) => void;
+};
+
+function WelcomeScreen({ onPress }: Props) {
    return (
       <Screen fullScreen>
          <ImageBackground
@@ -16,7 +21,7 @@ function WelcomeScreen({ onPress }) {
          >
             <View style={styles.logo}>
                <Image source={require("../assets/favicon.png")} />
-               <Text style={Styles.TEXT}>Welcome to React Native</Text>
+               <Text style={STYLES.TEXT}>Welcome to React Native</Text>
             </View>
 
             <View style={styles.container}>
