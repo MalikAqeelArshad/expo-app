@@ -1,9 +1,23 @@
-import { View, StyleSheet, Image, TouchableOpacity, Platform } from "react-native";
+import {
+   View,
+   StyleSheet,
+   Image,
+   TouchableOpacity,
+   Platform,
+   ImageSourcePropType,
+} from "react-native";
 
 import Text from "./Text";
 import COLORS from "../config/colors";
 
-const Card = ({ title, subTitle, image, onPress }) => {
+interface CardProps {
+   title: string;
+   subTitle?: string;
+   image: ImageSourcePropType;
+   onPress?: () => void;
+}
+
+const Card: React.FC<CardProps> = ({ title, subTitle, image, onPress }) => {
    return (
       <TouchableOpacity style={styles.container} onPress={onPress}>
          <View style={styles.card}>
@@ -12,9 +26,11 @@ const Card = ({ title, subTitle, image, onPress }) => {
                <Text style={styles.title} numberOfLines={1}>
                   {title}
                </Text>
-               <Text style={styles.subTitle} numberOfLines={2}>
-                  {subTitle}
-               </Text>
+               {subTitle && (
+                  <Text style={styles.subTitle} numberOfLines={2}>
+                     {subTitle}
+                  </Text>
+               )}
             </View>
          </View>
       </TouchableOpacity>
@@ -25,7 +41,6 @@ const styles = StyleSheet.create({
    container: {
       borderRadius: 15,
       backgroundColor: COLORS.white,
-      // marginHorizontal: 10,
       marginBottom: 15,
       ...Platform.select({
          ios: {

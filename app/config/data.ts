@@ -1,4 +1,23 @@
-export const MESSAGES = [
+import { ImageSourcePropType } from "react-native";
+
+// Messages type
+export type Message = {
+   id: number;
+   title: string;
+   description: string;
+   image: ImageSourcePropType;
+};
+
+// Listings type
+export type Listing = {
+   id: number;
+   title: string;
+   price: number;
+   image: ImageSourcePropType;
+};
+
+// Sample messages
+export const MESSAGES: Message[] = [
    {
       id: 1,
       title: "Title 1",
@@ -43,7 +62,8 @@ export const MESSAGES = [
    },
 ];
 
-export const LISTINGS = [
+// Sample listings
+export const LISTINGS: Listing[] = [
    {
       id: 1,
       title: "Red jacket for sale",

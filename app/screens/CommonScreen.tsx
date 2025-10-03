@@ -16,14 +16,18 @@ import Input from "../components/Input";
 import Text from "../components/Text";
 import Icon from "../components/Icon";
 import Switch from "../components/Switch";
-
-import Styles from "../config/styles";
 import Picker from "../components/Picker";
-const { COLORS, TEXT, INPUT } = Styles;
+
+import { STYLES } from "../config/styles";
+const { COLORS, TEXT, INPUT } = STYLES;
 
 import { MESSAGES } from "../config/data";
 
-function CommonScreen({ onPress }) {
+type Props = {
+   onPress: (page: number) => void;
+};
+
+function CommonScreen({ onPress }: Props) {
    return (
       <Screen>
          <ImageBackground
@@ -143,8 +147,6 @@ const styles = StyleSheet.create({
    },
    btn: {
       ...INPUT,
-      // width: '100%',
-      // marginVertical: 10,
       borderRadius: 100,
       overflow: "hidden",
       justifyContent: "center",

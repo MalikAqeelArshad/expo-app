@@ -1,3 +1,4 @@
+import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import Screen from "../components/Screen";
@@ -5,7 +6,11 @@ import Card from "../components/Card";
 
 import { LISTINGS } from "../config/data";
 
-function ListingsScreen({ onPress }) {
+type Props = {
+   onPress: (page: number) => void,
+};
+
+function ListingsScreen({ onPress }: Props) {
    return (
       <Screen barColor="dark" barStyle>
          <FlatList

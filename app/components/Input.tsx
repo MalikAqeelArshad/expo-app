@@ -1,15 +1,29 @@
 import { useState } from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, TextInputProps } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { STYLES } from "../config/styles";
 
-import Styles from "../config/styles";
-const { COLORS, INPUT } = Styles;
+const { COLORS, INPUT } = STYLES;
 
 const DEFAULT_PADDING = 15;
 const ICON_WIDTH = 50;
 const ICON_PADDING_OFFSET = 10;
 
-const AppInput = ({
+interface AppInputProps extends TextInputProps {
+   icon?: keyof typeof MaterialCommunityIcons.glyphMap;
+   size?: number;
+   iconColor?: string;
+   iconBackground?: string;
+   color?: string;
+   background?: string;
+   focusText?: string;
+   focusBorder?: string;
+   focusBackground?: string;
+   rounded?: number | boolean;
+   style?: any;
+}
+
+const AppInput: React.FC<AppInputProps> = ({
    icon,
    size = 25,
    iconColor = "dark",
@@ -53,7 +67,7 @@ const AppInput = ({
          {hasIcon && (
             <View style={[styles.iconContainer, { backgroundColor: COLORS[iconBackground] }]}>
                <MaterialCommunityIcons
-                  name={icon}
+                  name={icon!}
                   size={size}
                   color={COLORS[iconColor] || COLORS[color]}
                />
@@ -96,7 +110,6 @@ const styles = StyleSheet.create({
       height: "100%",
       justifyContent: "center",
       alignItems: "center",
-      // padding: 10,
       zIndex: 1,
    },
    input: {

@@ -1,9 +1,13 @@
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback, GestureResponderEvent } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import COLORS from "../../config/colors";
 
-function ListItemDeleteAction({ onPress }) {
+type ListItemDeleteActionProps = {
+   onPress?: (event: GestureResponderEvent) => void,
+};
+
+function ListItemDeleteAction({ onPress }: ListItemDeleteActionProps) {
    return (
       <TouchableWithoutFeedback onPress={onPress}>
          <View style={styles.container}>

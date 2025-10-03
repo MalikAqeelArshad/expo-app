@@ -1,4 +1,4 @@
-import { FlatList, Image, View, StyleSheet } from "react-native";
+import { FlatList, Image, View, StyleSheet, ImageSourcePropType } from "react-native";
 
 import Screen from "../components/Screen";
 import Text from "../components/Text";
@@ -7,14 +7,14 @@ import { ListItem, ListItemSeparator } from "../components/lists";
 import COLORS from "../config/colors";
 import { LISTINGS } from "../config/data";
 
-// type Props = {
-//    title: String,
-//    subTitle: String,
-//    image: String,
-//    onPress: () => void,
-// };
+type Props = {
+   title?: string;
+   subTitle?: string;
+   image?: ImageSourcePropType;
+   onPress: (page: number) => void;
+};
 
-function ListingDetailsScreen({ title, subTitle, image, onPress }) {
+function ListingDetailsScreen({ title, subTitle, image, onPress }: Props) {
    return (
       <Screen statusBar={false}>
          <Image style={styles.image} source={image || require("../assets/jacket.jpg")} />
@@ -31,12 +31,12 @@ function ListingDetailsScreen({ title, subTitle, image, onPress }) {
          <FlatList
             data={LISTINGS}
             keyExtractor={(x) => x.id.toString()}
-            ItemSeparatorComponent={<ListItemSeparator />}
+            ItemSeparatorComponent={ListItemSeparator}
             renderItem={({ item }) => (
                <ListItem
                   image={item.image}
                   title={item.title}
-                  subTitle={item.price}
+                  subTitle={String(item.price)}
                   onPress={() => onPress(5)}
                />
             )}

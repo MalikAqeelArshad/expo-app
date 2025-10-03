@@ -1,12 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FlatList } from "react-native";
 
 import Screen from "../components/Screen";
-import { ListItem, ListItemSeparator, ListItemDeleteAction } from "../components/lists";
+import { ListItem, ListItemSeparator } from "../components/lists";
 
 import { MESSAGES } from "../config/data";
 
-function MessagesScreen({ onPress }) {
+type Props = {
+   onPress: (page: number) => void,
+};
+
+function MessagesScreen({ onPress }: Props) {
    const [data, setData] = useState(MESSAGES.slice(0, 5));
 
    return (
@@ -14,7 +18,7 @@ function MessagesScreen({ onPress }) {
          <FlatList
             data={data}
             keyExtractor={(x) => x.id.toString()}
-            ItemSeparatorComponent={<ListItemSeparator />}
+            ItemSeparatorComponent={ListItemSeparator}
             renderItem={({ item }) => (
                <ListItem
                   image={item.image}

@@ -1,17 +1,20 @@
-import { Platform } from "react-native";
+import { Platform, TextStyle, ViewStyle } from "react-native";
 import COLORS from "./colors";
 
-export const ANDROID = Platform.OS === "android";
+// Platform check
+export const ANDROID: boolean = Platform.OS === "android";
 
-const TEXT = {
+// Base text style
+const TEXT: TextStyle = {
    color: COLORS.dark,
    fontSize: ANDROID ? 18 : 20,
    fontFamily: ANDROID ? "Roboto" : "Avenir",
 };
 
-const WIDTH_HEIGHT = { height: 50, width: "100%" };
+const WIDTH_HEIGHT: ViewStyle = { height: 50, width: "100%" };
 
-export default {
+// Styles config
+export const STYLES = {
    COLORS,
    TEXT,
    INPUT: {
@@ -19,7 +22,7 @@ export default {
       ...WIDTH_HEIGHT,
       fontSize: ANDROID ? 14 : 16,
       paddingHorizontal: 15,
-   },
+   } as TextStyle & ViewStyle,
    BUTTON: {
       ...TEXT,
       ...WIDTH_HEIGHT,
@@ -28,5 +31,5 @@ export default {
       alignItems: "center",
       justifyContent: "center",
       paddingHorizontal: 15,
-   },
+   } as TextStyle & ViewStyle,
 };

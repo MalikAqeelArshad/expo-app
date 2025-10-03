@@ -3,8 +3,18 @@ import { View, StyleSheet, FlatList } from "react-native";
 import Screen from "../components/Screen";
 import Icon from "../components/Icon";
 import { ListItem, ListItemSeparator } from "../components/lists";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const MENU = [
+type MenuItem = {
+   page: number;
+   title: string;
+   icon: {
+      name: keyof typeof MaterialCommunityIcons.glyphMap;
+      background: string;
+   };
+};
+
+const MENU: MenuItem[] = [
    {
       page: 3,
       title: "My Listings",
@@ -23,7 +33,11 @@ const MENU = [
    },
 ];
 
-function SettingsScreen({ onPress }) {
+type Props = {
+   onPress: (page: number) => void;
+};
+
+function SettingsScreen({ onPress }: Props) {
    return (
       <Screen>
          <View style={styles.container}>
@@ -40,7 +54,7 @@ function SettingsScreen({ onPress }) {
             <FlatList
                data={MENU}
                keyExtractor={(x) => x.title}
-               ItemSeparatorComponent={<ListItemSeparator />}
+               ItemSeparatorComponent={ListItemSeparator}
                renderItem={({ item }) => (
                   <ListItem
                      onPress={() => onPress(item.page)}
