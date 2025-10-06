@@ -1,10 +1,9 @@
-import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import Screen from "../components/Screen";
-import Card from "../components/Card";
+import Screen from "@/components/Screen";
+import Card from "@/components/Card";
 
-function ProductsScreen() {
+const ProductsScreen = () => {
    return (
       <Screen>
          <View style={styles.container}>
@@ -16,7 +15,7 @@ function ProductsScreen() {
          </View>
       </Screen>
    );
-}
+};
 
 const styles = StyleSheet.create({
    container: {

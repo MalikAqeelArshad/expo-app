@@ -1,17 +1,16 @@
-import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
 
-import Screen from "../components/Screen";
-import Button from "../components/Button";
-import Text from "../components/Text";
+import Screen from "@/components/Screen";
+import Button from "@/components/Button";
+import Text from "@/components/Text";
 
-import { STYLES } from "../config/styles";
+import { STYLES } from "@/utils/styles";
 
-type Props = {
+type ScreenProps = {
    onPress: (page: number) => void;
 };
 
-function WelcomeScreen({ onPress }: Props) {
+const WelcomeScreen = ({ onPress }: ScreenProps) => {
    return (
       <Screen fullScreen>
          <ImageBackground
@@ -31,7 +30,7 @@ function WelcomeScreen({ onPress }: Props) {
          </ImageBackground>
       </Screen>
    );
-}
+};
 
 const styles = StyleSheet.create({
    background: {

@@ -6,25 +6,25 @@ import {
    ImageSourcePropType,
    GestureResponderEvent,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 // import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import Text from "../Text";
-import COLORS from "../../config/colors";
+import COLORS from "@/utils/colors";
+import { ExpoIcon } from "../Icon";
 
 type ListItemProps = {
-   title?: string,
-   subTitle?: string,
-   image?: ImageSourcePropType,
-   IconComponent?: React.ReactNode,
-   onPress?: (event: GestureResponderEvent) => void,
-   chevron?: boolean,
-   titleLines?: number,
-   subTitleLines?: number,
-   renderRightActions?: () => React.ReactNode,
+   title?: string;
+   subTitle?: string;
+   image?: ImageSourcePropType;
+   IconComponent?: React.ReactNode;
+   onPress?: (event: GestureResponderEvent) => void;
+   chevron?: boolean;
+   titleLines?: number;
+   subTitleLines?: number;
+   renderRightActions?: () => React.ReactNode;
 };
 
-function ListItem({
+const ListItem = ({
    title,
    subTitle,
    image,
@@ -34,7 +34,7 @@ function ListItem({
    titleLines = 1,
    subTitleLines = 2,
    renderRightActions,
-}: ListItemProps) {
+}: ListItemProps) => {
    return (
       // <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={COLORS.medium} onPress={onPress}>
@@ -53,14 +53,12 @@ function ListItem({
                   </Text>
                )}
             </View>
-            {chevron && (
-               <MaterialCommunityIcons color={COLORS.medium} name="chevron-right" size={25} />
-            )}
+            {chevron && <ExpoIcon color={COLORS.medium} name="chevron-right" size={25} />}
          </View>
       </TouchableHighlight>
       // </Swipeable>
    );
-}
+};
 
 const styles = StyleSheet.create({
    container: {

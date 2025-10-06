@@ -1,23 +1,27 @@
-import { ImageSourcePropType } from "react-native";
+import { TListing, TMenuItem, TMessage } from "./types";
 
-// Messages type
-export type Message = {
-   id: number;
-   title: string;
-   description: string;
-   image: ImageSourcePropType;
-};
-
-// Listings type
-export type Listing = {
-   id: number;
-   title: string;
-   price: number;
-   image: ImageSourcePropType;
-};
+// Sample menu items
+export const MENU: TMenuItem[] = [
+   {
+      page: 3,
+      title: "My Listings",
+      icon: {
+         name: "format-list-bulleted",
+         background: "primary",
+      },
+   },
+   {
+      page: 2,
+      title: "My Messages",
+      icon: {
+         name: "email",
+         background: "secondary",
+      },
+   },
+];
 
 // Sample messages
-export const MESSAGES: Message[] = [
+export const MESSAGES: TMessage[] = [
    {
       id: 1,
       title: "Title 1",
@@ -63,7 +67,7 @@ export const MESSAGES: Message[] = [
 ];
 
 // Sample listings
-export const LISTINGS: Listing[] = [
+export const LISTINGS: TListing[] = [
    {
       id: 1,
       title: "Red jacket for sale",

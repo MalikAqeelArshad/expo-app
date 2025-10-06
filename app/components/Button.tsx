@@ -1,9 +1,9 @@
 import { Keyboard, Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
-import { STYLES } from "../config/styles";
 
+import { STYLES } from "@/utils/styles";
 const { COLORS, BUTTON } = STYLES;
 
-interface AppButtonProps extends TouchableOpacityProps {
+interface ButtonProps extends TouchableOpacityProps {
    background?: string;
    color?: string;
    rounded?: number;
@@ -11,14 +11,14 @@ interface AppButtonProps extends TouchableOpacityProps {
    onPress?: () => void;
 }
 
-const AppButton: React.FC<AppButtonProps> = ({
+const Button = ({
    background = "primary",
    color = "white",
    rounded = 1000,
    title,
    onPress,
    ...otherProps
-}) => {
+}: ButtonProps) => {
    return (
       <TouchableOpacity
          {...otherProps}
@@ -39,4 +39,4 @@ const AppButton: React.FC<AppButtonProps> = ({
    );
 };
 
-export default AppButton;
+export default Button;

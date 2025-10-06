@@ -1,16 +1,15 @@
-import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 
-import Screen from "../components/Screen";
-import Card from "../components/Card";
+import Screen from "@/components/Screen";
+import Card from "@/components/Card";
 
-import { LISTINGS } from "../config/data";
+import { LISTINGS } from "@/utils/data";
 
-type Props = {
-   onPress: (page: number) => void,
+type ScreenProps = {
+   onPress: (page: number) => void;
 };
 
-function ListingsScreen({ onPress }: Props) {
+const ListingsScreen = ({ onPress }: ScreenProps) => {
    return (
       <Screen barColor="dark" barStyle>
          <FlatList
@@ -28,7 +27,7 @@ function ListingsScreen({ onPress }: Props) {
          />
       </Screen>
    );
-}
+};
 
 const styles = StyleSheet.create({
    container: {

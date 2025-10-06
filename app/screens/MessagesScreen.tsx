@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FlatList } from "react-native";
 
-import Screen from "../components/Screen";
-import { ListItem, ListItemSeparator } from "../components/lists";
+import Screen from "@/components/Screen";
+import { ListItem, ListItemSeparator } from "@/components/lists";
 
-import { MESSAGES } from "../config/data";
+import { MESSAGES } from "@/utils/data";
 
-type Props = {
-   onPress: (page: number) => void,
+type ScreenProps = {
+   onPress: (page: number) => void;
 };
 
-function MessagesScreen({ onPress }: Props) {
+const MessagesScreen = ({ onPress }: ScreenProps) => {
    const [data, setData] = useState(MESSAGES.slice(0, 5));
 
    return (
@@ -35,6 +35,6 @@ function MessagesScreen({ onPress }: Props) {
          />
       </Screen>
    );
-}
+};
 
 export default MessagesScreen;

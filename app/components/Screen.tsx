@@ -1,7 +1,7 @@
-import { KeyboardAvoidingView, View, Platform, StatusBar, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, View, Platform, StatusBar } from "react-native";
 import Constants from "expo-constants";
 
-import COLORS from "../config/colors";
+import COLORS from "@/utils/colors";
 
 interface ScreenProps {
    fullScreen?: boolean;
@@ -12,14 +12,14 @@ interface ScreenProps {
    children?: React.ReactNode;
 }
 
-const Screen: React.FC<ScreenProps> = ({
+const Screen = ({
    fullScreen = false,
    statusBar = true,
    barStyle = false,
    barColor,
    background,
    children,
-}) => {
+}: ScreenProps) => {
    return (
       <KeyboardAvoidingView
          behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -48,11 +48,5 @@ const Screen: React.FC<ScreenProps> = ({
       </KeyboardAvoidingView>
    );
 };
-
-const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-   },
-});
 
 export default Screen;
