@@ -1,21 +1,21 @@
 import { View, StyleSheet, TouchableWithoutFeedback, GestureResponderEvent } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import COLORS from "../../config/colors";
+import { ExpoIcon } from "../Icon";
+import COLORS from "@/utils/colors";
 
 type ListItemDeleteActionProps = {
-   onPress?: (event: GestureResponderEvent) => void,
+   onPress?: (event: GestureResponderEvent) => void;
 };
 
-function ListItemDeleteAction({ onPress }: ListItemDeleteActionProps) {
+const ListItemDeleteAction = ({ onPress }: ListItemDeleteActionProps) => {
    return (
       <TouchableWithoutFeedback onPress={onPress}>
          <View style={styles.container}>
-            <MaterialCommunityIcons name="trash-can" size={35} color={COLORS.white} />
+            <ExpoIcon name="trash-can" size={35} color={COLORS.white} />
          </View>
       </TouchableWithoutFeedback>
    );
-}
+};
 
 const styles = StyleSheet.create({
    container: {

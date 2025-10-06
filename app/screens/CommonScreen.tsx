@@ -1,4 +1,3 @@
-import React from "react";
 import {
    Image,
    ImageBackground,
@@ -10,24 +9,24 @@ import {
    View,
 } from "react-native";
 
-import Screen from "../components/Screen";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import Text from "../components/Text";
-import Icon from "../components/Icon";
-import Switch from "../components/Switch";
-import Picker from "../components/Picker";
+import Screen from "@/components/Screen";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Text from "@/components/Text";
+import Icon from "@/components/Icon";
+import Switch from "@/components/Switch";
+import Picker from "@/components/Picker";
 
-import { STYLES } from "../config/styles";
+import { STYLES } from "@/utils/styles";
 const { COLORS, TEXT, INPUT } = STYLES;
 
-import { MESSAGES } from "../config/data";
+import { MESSAGES } from "@/utils/data";
 
-type Props = {
+type ScreenProps = {
    onPress: (page: number) => void;
 };
 
-function CommonScreen({ onPress }: Props) {
+const CommonScreen = ({ onPress }: ScreenProps) => {
    return (
       <Screen>
          <ImageBackground
@@ -135,7 +134,7 @@ function CommonScreen({ onPress }: Props) {
          </ImageBackground>
       </Screen>
    );
-}
+};
 
 const styles = StyleSheet.create({
    container: {

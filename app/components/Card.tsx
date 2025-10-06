@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import Text from "./Text";
-import COLORS from "../config/colors";
+import COLORS from "@/utils/colors";
 
 interface CardProps {
    title: string;
@@ -17,7 +17,7 @@ interface CardProps {
    onPress?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ title, subTitle, image, onPress }) => {
+const Card = ({ title, subTitle, image, onPress }: CardProps) => {
    return (
       <TouchableOpacity style={styles.container} onPress={onPress}>
          <View style={styles.card}>

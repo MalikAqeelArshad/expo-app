@@ -1,43 +1,15 @@
 import { View, StyleSheet, FlatList } from "react-native";
 
-import Screen from "../components/Screen";
-import Icon from "../components/Icon";
-import { ListItem, ListItemSeparator } from "../components/lists";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Screen from "@/components/Screen";
+import Icon from "@/components/Icon";
+import { ListItem, ListItemSeparator } from "@/components/lists";
+import { MENU } from "@/utils/data";
 
-type MenuItem = {
-   page: number;
-   title: string;
-   icon: {
-      name: keyof typeof MaterialCommunityIcons.glyphMap;
-      background: string;
-   };
-};
-
-const MENU: MenuItem[] = [
-   {
-      page: 3,
-      title: "My Listings",
-      icon: {
-         name: "format-list-bulleted",
-         background: "primary",
-      },
-   },
-   {
-      page: 2,
-      title: "My Messages",
-      icon: {
-         name: "email",
-         background: "secondary",
-      },
-   },
-];
-
-type Props = {
+type ScreenProps = {
    onPress: (page: number) => void;
 };
 
-function SettingsScreen({ onPress }: Props) {
+const AccountScreen = ({ onPress }: ScreenProps) => {
    return (
       <Screen>
          <View style={styles.container}>
@@ -75,7 +47,7 @@ function SettingsScreen({ onPress }: Props) {
          />
       </Screen>
    );
-}
+};
 
 const styles = StyleSheet.create({
    container: {
@@ -83,4 +55,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default SettingsScreen;
+export default AccountScreen;

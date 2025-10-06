@@ -1,13 +1,13 @@
 import { View } from "react-native";
 
-import COLORS from "../../config/colors";
+import COLORS from "@/utils/colors";
 
 type ListItemSeparatorProps = {
    color?: keyof typeof COLORS | string;
    height?: number;
 };
 
-function ListItemSeparator({ color = "light", height = 1 }: ListItemSeparatorProps) {
+const ListItemSeparator = ({ color = "light", height = 1 }: ListItemSeparatorProps) => {
    return (
       <View
          style={[
@@ -19,6 +19,6 @@ function ListItemSeparator({ color = "light", height = 1 }: ListItemSeparatorPro
          ]}
       />
    );
-}
+};
 
 export default ListItemSeparator;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Styles from "../config/styles";
+import Styles from "@/utils/styles";
 const { COLORS, INPUT } = Styles;
 
 const AppInputOld = ({

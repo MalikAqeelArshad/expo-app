@@ -9,11 +9,10 @@ import {
    ViewStyle,
    StyleProp,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Icon from "./Icon";
 import Input from "./Input";
 import Screen from "./Screen";
+import Icon, { ExpoIcon, TExpoIcon } from "./Icon";
 import { ListItem, ListItemSeparator } from "./lists";
 
 interface PickerItem {
@@ -22,7 +21,7 @@ interface PickerItem {
 }
 
 interface PickerProps {
-   icon?: keyof typeof MaterialCommunityIcons.glyphMap;
+   icon?: TExpoIcon;
    size?: number;
    iconColor?: string;
    iconBackground?: string;
@@ -30,14 +29,14 @@ interface PickerProps {
    background?: string;
    rounded?: boolean | number;
    placeholder?: string;
-   rightIcon?: keyof typeof MaterialCommunityIcons.glyphMap | false;
+   rightIcon?: TExpoIcon | false;
    rightIconColor?: string;
    items?: PickerItem[];
    style?: StyleProp<ViewStyle>;
    modalStyle?: StyleProp<ViewStyle>;
 }
 
-const Picker: React.FC<PickerProps> = ({
+const Picker = ({
    icon,
    size = 25,
    iconColor,
@@ -51,7 +50,7 @@ const Picker: React.FC<PickerProps> = ({
    items = [],
    style,
    modalStyle,
-}) => {
+}: PickerProps) => {
    const [modalVisible, setModalVisible] = useState(false);
 
    return (
@@ -73,7 +72,7 @@ const Picker: React.FC<PickerProps> = ({
                />
                {rightIcon !== false && (
                   <View style={styles.iconView}>
-                     <MaterialCommunityIcons
+                     <ExpoIcon
                         name={rightIcon}
                         size={size}
                         color={rightIconColor}

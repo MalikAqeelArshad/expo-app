@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { View, Switch, Text, SwitchProps } from "react-native";
+import { useState } from "react";
+import { View, Switch as AppSwitch, Text, SwitchProps } from "react-native";
 
-type AppSwitchProps = SwitchProps;
-
-const AppSwitch: React.FC<AppSwitchProps> = ({ ...otherProps }) => {
+const Switch = ({ ...otherProps }: SwitchProps) => {
    const [isEnabled, setIsEnabled] = useState(false);
    const toggleSwitch = () => setIsEnabled(!isEnabled);
 
    return (
       <View style={{ gap: 5, flexDirection: "row", alignItems: "center" }}>
-         <Switch
+         <AppSwitch
             {...otherProps}
             trackColor={{ false: "#777", true: "#29dd50" }}
             thumbColor={isEnabled ? "#00865a" : "#f4f3f4"}
@@ -22,4 +20,4 @@ const AppSwitch: React.FC<AppSwitchProps> = ({ ...otherProps }) => {
    );
 };
 
-export default AppSwitch;
+export default Switch;

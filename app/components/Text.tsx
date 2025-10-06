@@ -1,16 +1,16 @@
-import { Text, TextProps, TextStyle } from "react-native";
-import { STYLES } from "../config/styles";
+import { Text as AppText, TextProps, TextStyle } from "react-native";
+import { STYLES } from "@/utils/styles";
 
 interface AppTextProps extends TextProps {
    style?: TextStyle | TextStyle[];
 }
 
-const AppText: React.FC<AppTextProps> = ({ children, style, ...otherProps }) => {
+const Text = ({ children, style, ...otherProps }: AppTextProps) => {
    return (
-      <Text style={[STYLES.TEXT, style]} {...otherProps}>
+      <AppText style={[STYLES.TEXT, style]} {...otherProps}>
          {children}
-      </Text>
+      </AppText>
    );
 };
 
-export default AppText;
+export default Text;
