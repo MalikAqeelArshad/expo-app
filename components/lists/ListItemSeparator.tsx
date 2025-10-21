@@ -14,7 +14,7 @@ const ListItemSeparator = ({ color = "light", height = 1 }: ListItemSeparatorPro
             {
                width: "100%",
                height: height,
-               backgroundColor: (COLORS as any)[color] || COLORS.light,
+               backgroundColor: COLORS[color] || COLORS.light,
             },
          ]}
       />

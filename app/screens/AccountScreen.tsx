@@ -17,8 +17,8 @@ const AccountScreen = ({ onPress }: ScreenProps) => {
                chevron={false}
                title="Aqeel Malik"
                subTitle="malik.aqeelarshad@gmail.com"
-               subTitleLines={1}
-               image={require("../assets/photo.jpg")}
+               numberOfLines={{ subTitle: 1 }}
+               image={require("@/assets/img/photo.jpg")}
             />
          </View>
 
