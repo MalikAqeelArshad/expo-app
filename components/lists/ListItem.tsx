@@ -5,6 +5,10 @@ import {
    TouchableHighlight,
    ImageSourcePropType,
    GestureResponderEvent,
+   StyleProp,
+   ViewStyle,
+   ImageStyle,
+   TextStyle,
 } from "react-native";
 // import Swipeable from 'react-native-gesture-handler/Swipeable';
 
@@ -18,9 +22,15 @@ type ListItemProps = {
    image?: ImageSourcePropType;
    IconComponent?: React.ReactNode;
    onPress?: (event: GestureResponderEvent) => void;
-   chevron?: boolean;
-   titleLines?: number;
-   subTitleLines?: number;
+   chevron?: number | false;
+   numberOfLines?: { title?: number; subTitle?: number };
+   style?: {
+      container?: StyleProp<ViewStyle>;
+      details?: StyleProp<ViewStyle>;
+      image?: StyleProp<ImageStyle>;
+      title?: StyleProp<TextStyle>;
+      subTitle?: StyleProp<TextStyle>;
+   };
    renderRightActions?: () => React.ReactNode;
 };
 
@@ -30,30 +40,33 @@ const ListItem = ({
    image,
    IconComponent,
    onPress,
-   chevron = true,
-   titleLines = 1,
-   subTitleLines = 2,
+   chevron = 25,
+   numberOfLines = { title: 1, subTitle: 2 },
+   style,
    renderRightActions,
 }: ListItemProps) => {
    return (
       // <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={COLORS.medium} onPress={onPress}>
-         <View style={styles.container}>
+         <View style={[styles.container, style?.container]}>
             {IconComponent}
-            {image && <Image style={styles.image} source={image} />}
-            <View style={styles.details}>
+            {image && <Image style={[styles.image, style?.image]} source={image} />}
+            <View style={[styles.details, style?.details]}>
                {title && (
-                  <Text style={styles.title} numberOfLines={titleLines}>
+                  <Text style={[styles.title, style?.title]} numberOfLines={numberOfLines.title}>
                      {title}
                   </Text>
                )}
                {subTitle && (
-                  <Text style={styles.subTitle} numberOfLines={subTitleLines}>
+                  <Text
+                     style={[styles.subTitle, style?.subTitle]}
+                     numberOfLines={numberOfLines.subTitle}
+                  >
                      {subTitle}
                   </Text>
                )}
             </View>
-            {chevron && <ExpoIcon color={COLORS.medium} name="chevron-right" size={25} />}
+            {chevron && <ExpoIcon color={COLORS.medium} name="chevron-right" size={chevron} />}
          </View>
       </TouchableHighlight>
       // </Swipeable>
@@ -70,7 +83,7 @@ const styles = StyleSheet.create({
    image: {
       width: 70,
       height: 70,
-      borderRadius: 35,
+      borderRadius: 1000,
    },
    details: {
       flex: 1,

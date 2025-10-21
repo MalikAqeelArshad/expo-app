@@ -4,7 +4,7 @@
       "strict": true,
       "baseUrl": ".", // ✅ Needed for paths to work
       "paths": {
-         "@/*": ["app/*"] // 👈 point directly to the app folder
+         "@/*": ["./*"] // 👈 point directly to the root folder
       }
    },
    "exclude": ["node_modules"],

@@ -32,14 +32,11 @@ const CommonScreen = ({ onPress }: ScreenProps) => {
          <ImageBackground
             resizeMode="stretch"
             style={{ flex: 1 }}
-            source={require("../assets/background.jpg")}
+            source={require("@/assets/img/background.jpg")}
          >
             <ScrollView style={{ flex: 1 }}>
                <View style={styles.container}>
-                  <Image
-                     source={require("../assets/favicon.png")}
-                     style={{ alignSelf: "center" }}
-                  />
+                  <Image source={require("@/assets/favicon.png")} style={{ alignSelf: "center" }} />
 
                   <Text style={{ textAlign: "center" }}>App Text</Text>
 

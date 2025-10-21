@@ -17,7 +17,7 @@ type ScreenProps = {
 const ListingDetailsScreen = ({ title, subTitle, image, onPress }: ScreenProps) => {
    return (
       <Screen statusBar={false}>
-         <Image style={styles.image} source={image || require("../assets/jacket.jpg")} />
+         <Image style={styles.image} source={image || require("@/assets/img/jacket.jpg")} />
 
          <View style={styles.details}>
             <Text style={styles.title} numberOfLines={1}>
@@ -38,6 +38,14 @@ const ListingDetailsScreen = ({ title, subTitle, image, onPress }: ScreenProps) 
                   title={item.title}
                   subTitle={String(item.price)}
                   onPress={() => onPress(5)}
+                  chevron={20}
+                  style={{
+                     container: { padding: 12 },
+                     details: { gap: 3, marginLeft: 12 },
+                     image: { width: 55, height: 55 },
+                     title: { fontSize: 17, fontWeight: 600 },
+                     subTitle: { fontSize: 16, fontWeight: 700 },
+                  }}
                />
             )}
          />

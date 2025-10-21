@@ -1,8 +1,8 @@
-import { Text as AppText, TextProps, TextStyle } from "react-native";
+import { Text as AppText, StyleProp, TextProps, TextStyle } from "react-native";
 import { STYLES } from "@/utils/styles";
 
 interface AppTextProps extends TextProps {
-   style?: TextStyle | TextStyle[];
+   style?: StyleProp<TextStyle>; // <- this allows TextStyle | TextStyle[] | undefined
 }
 
 const Text = ({ children, style, ...otherProps }: AppTextProps) => {

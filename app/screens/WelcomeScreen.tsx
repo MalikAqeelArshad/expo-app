@@ -16,10 +16,10 @@ const WelcomeScreen = ({ onPress }: ScreenProps) => {
          <ImageBackground
             blurRadius={3}
             style={styles.background}
-            source={require("../assets/background.jpg")}
+            source={require("@/assets/img/background.jpg")}
          >
             <View style={styles.logo}>
-               <Image source={require("../assets/favicon.png")} />
+               <Image source={require("@/assets/favicon.png")} />
                <Text style={STYLES.TEXT}>Welcome to React Native</Text>
             </View>
 

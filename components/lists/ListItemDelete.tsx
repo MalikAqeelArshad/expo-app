@@ -3,11 +3,11 @@ import { View, StyleSheet, TouchableWithoutFeedback, GestureResponderEvent } fro
 import { ExpoIcon } from "../Icon";
 import COLORS from "@/utils/colors";
 
-type ListItemDeleteActionProps = {
+type ListItemDeleteProps = {
    onPress?: (event: GestureResponderEvent) => void;
 };
 
-const ListItemDeleteAction = ({ onPress }: ListItemDeleteActionProps) => {
+const ListItemDelete = ({ onPress }: ListItemDeleteProps) => {
    return (
       <TouchableWithoutFeedback onPress={onPress}>
          <View style={styles.container}>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default ListItemDeleteAction;
+export default ListItemDelete;

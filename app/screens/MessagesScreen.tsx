@@ -26,7 +26,7 @@ const MessagesScreen = ({ onPress }: ScreenProps) => {
                   subTitle={item.description}
                   onPress={() => onPress(1)}
                   // renderRightActions={() => (
-                  //   <ListItemDeleteAction onPress={() => console.log(item)} />
+                  //   <ListItemDelete onPress={() => console.log(item)} />
                   // )}
                />
             )}
