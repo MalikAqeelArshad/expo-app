@@ -17,12 +17,7 @@ export default function App() {
    ) : page === 3 ? (
       <ListingsScreen onPress={(p = 4) => update(p)} />
    ) : page === 4 ? (
-      <ListingDetailsScreen
-         onPress={() => update(0)}
-         title={undefined}
-         subTitle={undefined}
-         image={undefined}
-      />
+      <ListingDetailsScreen onPress={() => update(0)} imageUrl={undefined} />
    ) : page === 5 ? (
       <CommonScreen onPress={(p = 0) => update(p)} />
    ) : (

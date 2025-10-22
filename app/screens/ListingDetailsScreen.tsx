@@ -10,22 +10,31 @@ import { LISTINGS } from "@/utils/data";
 type ScreenProps = {
    title?: string;
    subTitle?: string;
-   image?: ImageSourcePropType;
+   imageUrl?: ImageSourcePropType;
    onPress: (page: number) => void;
 };
 
-const ListingDetailsScreen = ({ title, subTitle, image, onPress }: ScreenProps) => {
+const ListingDetailsScreen = ({
+   title = "<Title>",
+   subTitle = "<Subtitle>",
+   imageUrl = require("@/assets/img/jacket.jpg"),
+   onPress,
+}: ScreenProps) => {
    return (
       <Screen statusBar={false}>
-         <Image style={styles.image} source={image || require("@/assets/img/jacket.jpg")} />
+         <Image style={styles.image} source={imageUrl} />
 
-         <View style={styles.details}>
-            <Text style={styles.title} numberOfLines={1}>
-               {title || "title"}
-            </Text>
-            <Text style={styles.subTitle} numberOfLines={2}>
-               {subTitle || "subTitle"}
-            </Text>
+         <View style={(title || subTitle) && styles.details}>
+            {title && (
+               <Text style={styles.title} numberOfLines={1}>
+                  {title}
+               </Text>
+            )}
+            {subTitle && (
+               <Text style={styles.subTitle} numberOfLines={2}>
+                  {subTitle}
+               </Text>
+            )}
          </View>
 
          <FlatList
