@@ -1,16 +1,12 @@
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import { router } from "expo-router";
 
 import Screen from "@/components/Screen";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
-
 import { STYLES } from "@/utils/styles";
 
-type ScreenProps = {
-   onPress: (page: number) => void;
-};
-
-const WelcomeScreen = ({ onPress }: ScreenProps) => {
+const Welcome = () => {
    return (
       <Screen fullScreen>
          <ImageBackground
@@ -24,8 +20,12 @@ const WelcomeScreen = ({ onPress }: ScreenProps) => {
             </View>
 
             <View style={styles.container}>
-               <Button title="Login" onPress={() => onPress(1)} />
-               <Button title="Register" background="secondary" onPress={() => onPress(5)} />
+               <Button title="Login" onPress={() => router.push("/account")} />
+               <Button
+                  title="Register"
+                  background="secondary"
+                  onPress={() => router.push("/common")}
+               />
             </View>
          </ImageBackground>
       </Screen>
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default WelcomeScreen;
+export default Welcome;

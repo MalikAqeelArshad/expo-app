@@ -1,15 +1,12 @@
 import { View, StyleSheet, FlatList } from "react-native";
+import { router } from "expo-router";
 
 import Screen from "@/components/Screen";
 import Icon from "@/components/Icon";
 import { ListItem, ListItemSeparator } from "@/components/lists";
 import { MENU } from "@/utils/data";
 
-type ScreenProps = {
-   onPress: (page: number) => void;
-};
-
-const AccountScreen = ({ onPress }: ScreenProps) => {
+const Account = () => {
    return (
       <Screen>
          <View style={styles.container}>
@@ -29,7 +26,7 @@ const AccountScreen = ({ onPress }: ScreenProps) => {
                ItemSeparatorComponent={ListItemSeparator}
                renderItem={({ item }) => (
                   <ListItem
-                     onPress={() => onPress(item.page)}
+                     onPress={() => router.push(item.page)}
                      title={item.title}
                      IconComponent={
                         <Icon name={item.icon.name} background={item.icon.background} />
@@ -41,7 +38,7 @@ const AccountScreen = ({ onPress }: ScreenProps) => {
 
          <ListItem
             chevron={false}
-            onPress={() => onPress(0)}
+            onPress={() => router.push("/")}
             title="Log Out"
             IconComponent={<Icon name="logout" background="yellow" />}
          />
@@ -55,4 +52,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default AccountScreen;
+export default Account;

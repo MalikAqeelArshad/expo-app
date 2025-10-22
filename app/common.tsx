@@ -8,6 +8,7 @@ import {
    TouchableHighlight,
    View,
 } from "react-native";
+import { router } from "expo-router";
 
 import Screen from "@/components/Screen";
 import Button from "@/components/Button";
@@ -22,11 +23,7 @@ const { COLORS, TEXT, INPUT } = STYLES;
 
 import { MESSAGES } from "@/utils/data";
 
-type ScreenProps = {
-   onPress: (page: number) => void;
-};
-
-const CommonScreen = ({ onPress }: ScreenProps) => {
+const Common = () => {
    return (
       <Screen>
          <ImageBackground
@@ -66,11 +63,7 @@ const CommonScreen = ({ onPress }: ScreenProps) => {
                      keyboardType="email-address"
                      placeholder="Default Input with Icon"
                   />
-                  <Input
-                     icon="account-tie"
-                     placeholder="Default Rounded Input with Icon"
-                     rounded={true}
-                  />
+                  <Input icon="account-tie" placeholder="Default Rounded Input with Icon" rounded />
                   <Input
                      icon="home"
                      iconColor="white"
@@ -82,7 +75,7 @@ const CommonScreen = ({ onPress }: ScreenProps) => {
                      iconColor="white"
                      iconBackground="dark"
                      placeholder="Default Rounded Input with Icon Background & Color"
-                     rounded={true}
+                     rounded
                   />
 
                   <Button
@@ -107,7 +100,7 @@ const CommonScreen = ({ onPress }: ScreenProps) => {
 
                   <Pressable
                      delayLongPress={500}
-                     onPress={() => onPress(0)}
+                     onPress={() => router.push("/")}
                      onLongPress={() => alert("Long Pressable")}
                      style={[styles.btn, { backgroundColor: COLORS.green }]}
                   >
@@ -155,4 +148,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default CommonScreen;
+export default Common;

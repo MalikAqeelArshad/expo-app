@@ -3,7 +3,7 @@ import { ImageSourcePropType } from "react-native";
 export type { TExpoIcon };
 // Menu item type
 export type TMenuItem = {
-   page: number;
+   page: string;
    title: string;
    icon: {
       name: TExpoIcon;
