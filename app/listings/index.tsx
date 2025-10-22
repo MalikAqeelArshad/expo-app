@@ -1,17 +1,13 @@
 import { FlatList, StyleSheet } from "react-native";
+import { router } from "expo-router";
 
 import Screen from "@/components/Screen";
 import Card from "@/components/Card";
-
 import { LISTINGS } from "@/utils/data";
 
-type ScreenProps = {
-   onPress: (page: number) => void;
-};
-
-const ListingsScreen = ({ onPress }: ScreenProps) => {
+const Listings = () => {
    return (
-      <Screen barColor="dark" barStyle>
+      <Screen barColor="dark" barStyle="light">
          <FlatList
             style={styles.container}
             data={LISTINGS}
@@ -21,7 +17,7 @@ const ListingsScreen = ({ onPress }: ScreenProps) => {
                   title={item.title}
                   subTitle={"$" + item.price}
                   image={item.image}
-                  onPress={() => onPress(4)}
+                  onPress={() => router.push("/listings/details")} // Navigate to listing details
                />
             )}
          />
@@ -36,4 +32,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default ListingsScreen;
+export default Listings;

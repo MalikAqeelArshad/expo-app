@@ -1,16 +1,18 @@
 import { View, StyleSheet } from "react-native";
+import { router } from "expo-router";
 
 import Screen from "@/components/Screen";
 import Card from "@/components/Card";
 
-const ProductsScreen = () => {
+const Products = () => {
    return (
       <Screen>
          <View style={styles.container}>
             <Card
                title="Red jacket for sale"
                subTitle="$100"
-               image={require("../assets/jacket.jpg")}
+               image={require("@/assets/img/jacket.jpg")}
+               onPress={() => router.push("/details")} // Navigate to details
             />
          </View>
       </Screen>
@@ -23,4 +25,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default ProductsScreen;
+export default Products;

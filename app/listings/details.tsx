@@ -1,4 +1,5 @@
 import { FlatList, Image, View, StyleSheet, ImageSourcePropType } from "react-native";
+import { router } from "expo-router";
 
 import Screen from "@/components/Screen";
 import Text from "@/components/Text";
@@ -7,19 +8,17 @@ import { ListItem, ListItemSeparator } from "@/components/lists";
 import COLORS from "@/utils/colors";
 import { LISTINGS } from "@/utils/data";
 
-type ScreenProps = {
+type ListingDetailsProps = {
    title?: string;
    subTitle?: string;
    imageUrl?: ImageSourcePropType;
-   onPress: (page: number) => void;
 };
 
-const ListingDetailsScreen = ({
+const ListingDetails = ({
    title = "<Title>",
    subTitle = "<Subtitle>",
    imageUrl = require("@/assets/img/jacket.jpg"),
-   onPress,
-}: ScreenProps) => {
+}: ListingDetailsProps) => {
    return (
       <Screen statusBar={false}>
          <Image style={styles.image} source={imageUrl} />
@@ -46,14 +45,14 @@ const ListingDetailsScreen = ({
                   image={item.image}
                   title={item.title}
                   subTitle={String(item.price)}
-                  onPress={() => onPress(5)}
+                  onPress={() => router.push("/common")} // Navigate to CommonScreen or other screen
                   chevron={20}
                   style={{
                      container: { padding: 12 },
                      details: { gap: 3, marginLeft: 12 },
                      image: { width: 55, height: 55 },
-                     title: { fontSize: 17, fontWeight: 600 },
-                     subTitle: { fontSize: 16, fontWeight: 700 },
+                     title: { fontSize: 17, fontWeight: "600" },
+                     subTitle: { fontSize: 16, fontWeight: "700" },
                   }}
                />
             )}
@@ -80,4 +79,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default ListingDetailsScreen;
+export default ListingDetails;

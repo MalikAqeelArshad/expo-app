@@ -13,12 +13,12 @@ const IMG = {
 // Menu items
 export const MENU: TMenuItem[] = [
    {
-      page: 3,
+      page: "/listings",
       title: "My Listings",
       icon: { name: "format-list-bulleted", background: "primary" },
    },
    {
-      page: 2,
+      page: "/messages",
       title: "My Messages",
       icon: { name: "email", background: "secondary" },
    },
