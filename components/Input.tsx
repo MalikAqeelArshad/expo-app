@@ -72,8 +72,11 @@ const Input = ({
 
          <TextInput
             {...otherProps}
-            value={text}
-            onChangeText={setText}
+            value={otherProps.value ?? text} // use external value if passed
+            onChangeText={(val) => {
+               setText(val); // local state
+               otherProps.onChangeText?.(val); // notify parent
+            }}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             placeholderTextColor={COLORS[color] + "99"}

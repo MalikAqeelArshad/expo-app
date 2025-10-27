@@ -17,6 +17,7 @@ import Text from "@/components/Text";
 import Icon from "@/components/Icon";
 import Switch from "@/components/Switch";
 import Picker from "@/components/Picker";
+import Select from "@/components/Select";
 
 import { STYLES } from "@/utils/styles";
 const { COLORS, TEXT, INPUT } = STYLES;
@@ -40,6 +41,7 @@ const Common = () => {
                   <Switch />
 
                   <Picker icon="apps" items={MESSAGES} />
+                  <Select items={MESSAGES} searchable chevron={false} />
 
                   <View style={{ gap: 5, flexDirection: "row", alignItems: "flex-end" }}>
                      <Icon name="home" />
@@ -106,6 +108,8 @@ const Common = () => {
                   >
                      <Text style={styles.btnText}>Pressable & Long Pressable</Text>
                   </Pressable>
+
+                  <Select icon="apps" items={MESSAGES} />
 
                   <TextInput
                      clearButtonMode="always"
