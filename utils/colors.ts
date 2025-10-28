@@ -1,8 +1,4 @@
-type ColorsType = {
-   [key: string]: string;
-};
-
-const COLORS: ColorsType = {
+const defaultColors = {
    transparent: "transparent",
    bgColor: "#f8f4f4",
    primary: "#fc5c65",
@@ -21,5 +17,8 @@ const COLORS: ColorsType = {
    orange: "#ffa500",
    yellow: "#ffd700",
 };
+
+const COLORS = defaultColors as { [key: string]: string };
+export type ColorKey = keyof typeof defaultColors;
 
 export default COLORS;

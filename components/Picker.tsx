@@ -12,8 +12,9 @@ import {
 
 import Input from "./Input";
 import Screen from "./Screen";
-import Icon, { ExpoIcon, TExpoIcon } from "./Icon";
+import Icon, { ExpoIcon } from "./Icon";
 import { ListItem, ListItemSeparator } from "./lists";
+import { TIcon } from "@/utils/types";
 
 interface PickerItem {
    id: number | string;
@@ -21,37 +22,40 @@ interface PickerItem {
 }
 
 interface PickerProps {
-   icon?: TExpoIcon;
-   size?: number;
-   iconColor?: string;
-   iconBackground?: string;
+   icon?: TIcon | false;
+   rightIcon?: TIcon | false;
    color?: string;
    background?: string;
    rounded?: boolean | number;
    placeholder?: string;
-   rightIcon?: TExpoIcon | false;
-   rightIconColor?: string;
    items?: PickerItem[];
    style?: StyleProp<ViewStyle>;
    modalStyle?: StyleProp<ViewStyle>;
+   chevron?: number | false;
+   onSelect?: (item: PickerItem) => void;
 }
 
 const Picker = ({
-   icon,
-   size = 25,
-   iconColor,
-   iconBackground,
+   icon = { name: "apps" },
+   rightIcon = { name: "chevron-down" },
    color,
    background,
    rounded,
    placeholder = "Please choose",
-   rightIcon = "chevron-down",
-   rightIconColor,
    items = [],
    style,
    modalStyle,
+   chevron = 25,
+   onSelect,
 }: PickerProps) => {
    const [modalVisible, setModalVisible] = useState(false);
+   const [selectedValue, setSelectedValue] = useState("");
+
+   const handleSelect = (item: PickerItem) => {
+      onSelect?.(item);
+      setSelectedValue(item.title);
+      setModalVisible(false);
+   };
 
    return (
       <>
@@ -59,23 +63,21 @@ const Picker = ({
             <View style={{ position: "relative", overflow: "hidden" }}>
                <Input
                   editable={false}
-                  placeholder={placeholder}
                   icon={icon}
-                  size={size}
-                  iconColor={iconColor}
-                  iconBackground={iconBackground}
                   color={color}
                   background={background}
                   rounded={rounded}
+                  placeholder={placeholder}
+                  value={selectedValue}
                   onPress={() => setModalVisible(true)}
                   style={{ paddingRight: 15, ...(style as object) }}
                />
-               {rightIcon !== false && (
+               {rightIcon && (
                   <View style={styles.iconView}>
                      <ExpoIcon
-                        name={rightIcon}
-                        size={size}
-                        color={rightIconColor}
+                        name={rightIcon?.name}
+                        size={rightIcon?.size || 25}
+                        color={rightIcon?.color}
                         style={{ right: 10, position: "absolute" }}
                      />
                   </View>
@@ -94,7 +96,11 @@ const Picker = ({
                      data={items}
                      keyExtractor={(k) => k.id.toString()}
                      renderItem={({ item }) => (
-                        <ListItem title={item.title} onPress={() => console.log(item)} />
+                        <ListItem
+                           chevron={chevron}
+                           title={item.title}
+                           onPress={() => handleSelect(item)}
+                        />
                      )}
                      ItemSeparatorComponent={ListItemSeparator}
                   />
