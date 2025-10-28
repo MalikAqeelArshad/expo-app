@@ -1,21 +1,18 @@
 import { useState } from "react";
 import { View, TextInput, StyleSheet, TextInputProps } from "react-native";
-import { ExpoIcon, TExpoIcon } from "./Icon";
-
+import { ExpoIcon } from "./Icon";
+import { TIcon } from "@/utils/types";
 import { STYLES } from "@/utils/styles";
-const { COLORS, INPUT } = STYLES;
 
+const { COLORS, INPUT } = STYLES;
 const DEFAULT_PADDING = 15;
 const ICON_WIDTH = 50;
 const ICON_PADDING_OFFSET = 10;
 
 interface InputProps extends TextInputProps {
-   icon?: TExpoIcon;
-   size?: number;
-   iconColor?: string;
-   iconBackground?: string;
-   color?: string;
-   background?: string;
+   icon?: TIcon | false;
+   color?: any;
+   background?: any;
    focusText?: string;
    focusBorder?: string;
    focusBackground?: string;
@@ -25,9 +22,6 @@ interface InputProps extends TextInputProps {
 
 const Input = ({
    icon,
-   size = 25,
-   iconColor = "dark",
-   iconBackground = "transparent",
    color = "dark",
    background = "white",
    focusText,
@@ -35,47 +29,40 @@ const Input = ({
    focusBackground = "white",
    rounded = 10,
    style = {},
-   ...otherProps
+   ...props // rest props
 }: InputProps) => {
    const [text, setText] = useState("");
    const [isFocus, setIsFocus] = useState(false);
 
-   const borderRadius = rounded === true ? 1000 : Number(rounded) || 0;
+   const borderRadius = style?.borderRadius ?? (rounded === true ? 1000 : Number(rounded) || 0);
    const borderColor = COLORS[isFocus ? focusBorder : style?.borderColor] || COLORS.light;
    const textColor = COLORS[isFocus && focusText ? focusText : style?.color] || COLORS[color];
-   const bgColor = COLORS[isFocus ? focusBackground : style?.backgroundColor] || COLORS[background];
+   const backgroundColor =
+      COLORS[isFocus ? focusBackground : style?.backgroundColor] || COLORS[background];
 
-   const hasIcon = Boolean(icon);
-   const iconHasBg = Boolean(icon && iconBackground !== "transparent");
+   const hasIcon = !!(icon && typeof icon !== "boolean" && icon.name);
+   const iconColor = hasIcon ? COLORS[icon!.color || color] : undefined;
+   const iconBg = hasIcon ? COLORS[icon!.background!] ?? "transparent" : undefined;
+
    const inputPaddingLeft = hasIcon
-      ? ICON_WIDTH + (iconHasBg ? ICON_PADDING_OFFSET : 0)
+      ? ICON_WIDTH + (iconBg !== "transparent" ? ICON_PADDING_OFFSET : 0)
       : DEFAULT_PADDING;
    const inputPaddingRight = style?.paddingRight || DEFAULT_PADDING;
 
    return (
-      <View
-         style={[
-            styles.container,
-            style,
-            {
-               borderColor,
-               borderRadius: style?.borderRadius || borderRadius,
-               backgroundColor: bgColor,
-            },
-         ]}
-      >
+      <View style={[styles.container, style, { borderColor, borderRadius, backgroundColor }]}>
          {hasIcon && (
-            <View style={[styles.iconContainer, { backgroundColor: COLORS[iconBackground] }]}>
-               <ExpoIcon name={icon!} size={size} color={COLORS[iconColor] || COLORS[color]} />
+            <View style={[styles.iconContainer, { backgroundColor: iconBg }]}>
+               <ExpoIcon name={icon!.name} size={icon!.size || 25} color={iconColor!} />
             </View>
          )}
 
          <TextInput
-            {...otherProps}
-            value={otherProps.value ?? text} // use external value if passed
+            {...props}
+            value={props.value ?? text}
             onChangeText={(val) => {
                setText(val); // local state
-               otherProps.onChangeText?.(val); // notify parent
+               props.onChangeText?.(val); // notify parent
             }}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
@@ -111,10 +98,7 @@ const styles = StyleSheet.create({
       alignItems: "center",
       zIndex: 1,
    },
-   input: {
-      flex: 1,
-      paddingVertical: 10,
-   },
+   input: { flex: 1, paddingVertical: 10 },
 });
 
 export default Input;

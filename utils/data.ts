@@ -1,4 +1,4 @@
-import { TListing, TMenuItem, TMessage } from "./types";
+import { TListing, TMenuItem, TMessage, TOption } from "./types";
 
 // Utility function to check if a number is even
 const isEven = (num: number) => num % 2 === 0;
@@ -9,6 +9,13 @@ const IMG = {
    jacket: require("@/assets/img/jacket.jpg"),
    couch: require("@/assets/img/couch.jpg"),
 };
+
+// Select Options
+export const OPTIONS: TOption[] = Array.from({ length: 10 }, (_, i) => ({
+   id: i + 1,
+   label: `Option ${i + 1}`,
+   value: `Value ${i + 1}`,
+}));
 
 // Menu items
 export const MENU: TMenuItem[] = [

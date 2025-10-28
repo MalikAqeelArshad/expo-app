@@ -12,82 +12,78 @@ import {
    ViewStyle,
 } from "react-native";
 import Input from "./Input";
-import { ExpoIcon, TExpoIcon } from "./Icon";
+import { ExpoIcon } from "./Icon";
 import { ListItem, ListItemSeparator } from "./lists";
+import { TIcon, TOption } from "@/utils/types";
 
-interface SelectItem {
-   id: number | string;
-   title: string;
-}
 interface SelectProps {
-   icon?: TExpoIcon;
-   size?: number;
-   iconColor?: string;
-   iconBackground?: string;
+   icon?: TIcon | false;
+   rightIcon?: TIcon | false;
    color?: string;
    background?: string;
    rounded?: boolean | number;
    placeholder?: string;
-   rightIcon?: TExpoIcon | false;
-   rightIconColor?: string;
-   items?: SelectItem[];
+   options?: TOption[];
    style?: StyleProp<TextInput>;
    modalStyle?: StyleProp<ViewStyle>;
    chevron?: number | false;
-   searchable?: boolean;
-   onSelect?: (item: SelectItem) => void;
+   searchKey?: string | undefined;
+   onSelect?: (item: TOption) => void;
 }
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
-const MAX_HEIGHT = SCREEN_HEIGHT * 0.4;
+const MAX_HEIGHT = SCREEN_HEIGHT * 0.4; // 40% of screen height
 
 const Select = ({
    icon,
-   size = 25,
-   iconColor,
-   iconBackground,
+   rightIcon = { name: "chevron-down" },
    color,
    background,
    rounded,
    placeholder = "Please choose",
-   rightIcon = "chevron-down",
-   rightIconColor,
-   items = [],
+   options = [],
    style,
    modalStyle,
    chevron = 25,
-   searchable = false,
+   searchKey,
    onSelect,
 }: SelectProps) => {
-   const [visible, setVisible] = useState(false);
-   const [layout, setLayout] = useState<LayoutRectangle | null>(null);
-   const [showAbove, setShowAbove] = useState(false);
-   const [search, setSearch] = useState("");
    const ref = useRef<View>(null);
+   const [showAbove, setShowAbove] = useState(false);
+   const [modalVisible, setModalVisible] = useState(false);
+   const [layout, setLayout] = useState<LayoutRectangle | null>(null);
 
+   // 🔹 Separate value states
+   const [selectedValue, setSelectedValue] = useState(""); // main input
+   const [searchValue, setSearchValue] = useState(""); // search box input
+
+   // 🔹 Filter using searchValue, not selectedValue
    const filtered = useMemo(
       () =>
-         searchable && search
-            ? items.filter((i) => i.title.toLowerCase().includes(search.toLowerCase().trim()))
-            : items,
-      [items, search, searchable]
+         searchKey && searchValue
+            ? options.filter((i) =>
+                 i[searchKey]?.toLowerCase().includes(searchValue.toLowerCase().trim())
+              )
+            : options,
+      [options, searchValue, searchKey]
    );
 
    const toggle = () => {
-      if (visible) return setVisible(false);
+      if (modalVisible) return setModalVisible(false);
       ref.current?.measureInWindow((px, py, w, h) => {
          const below = SCREEN_HEIGHT - (py + h);
          const above = py;
          setShowAbove(below < MAX_HEIGHT && above > below);
          setLayout({ x: px, y: py, width: w, height: h });
-         setVisible(true);
+         setSearchValue(""); // 🔹 Reset search each time modal opens
+         setModalVisible(true);
       });
    };
 
-   const handleSelect = (item: SelectItem) => {
+   const handleSelect = (item: TOption) => {
       onSelect?.(item);
-      setVisible(false);
-      setSearch("");
+      setSelectedValue(item.value as string);
+      setModalVisible(false);
    };
 
    return (
@@ -96,24 +92,26 @@ const Select = ({
             <View ref={ref}>
                <Input
                   editable={false}
-                  pointerEvents="none"
-                  placeholder={placeholder}
                   icon={icon}
-                  size={size}
-                  iconColor={iconColor}
-                  iconBackground={iconBackground}
                   color={color}
                   background={background}
                   rounded={rounded}
+                  placeholder={placeholder}
+                  value={selectedValue}
+                  pointerEvents="none"
                   style={style}
                />
                {rightIcon && (
                   <View style={styles.iconView}>
                      <ExpoIcon
-                        name={rightIcon}
-                        size={size}
-                        color={rightIconColor}
-                        style={{ right: 10, position: "absolute" }}
+                        name={rightIcon.name}
+                        size={rightIcon.size || 25}
+                        color={rightIcon.color}
+                        style={{
+                           right: 10,
+                           position: "absolute",
+                           transform: [{ rotate: modalVisible ? "180deg" : "0deg" }],
+                        }}
                      />
                   </View>
                )}
@@ -122,11 +120,11 @@ const Select = ({
 
          <Modal
             transparent
-            visible={visible}
+            visible={modalVisible}
             animationType="fade"
-            onRequestClose={() => setVisible(false)}
+            onRequestClose={() => setModalVisible(false)}
          >
-            <TouchableWithoutFeedback onPress={() => setVisible(false)}>
+            <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
                <View style={styles.overlay}>
                   {layout && (
                      <TouchableWithoutFeedback>
@@ -144,13 +142,13 @@ const Select = ({
                            ]}
                         >
                            <View style={styles.inner}>
-                              {searchable && (
+                              {searchKey && (
                                  <View style={styles.searchBox}>
                                     <Input
                                        autoFocus
-                                       icon="magnify"
-                                       value={search}
-                                       onChangeText={setSearch}
+                                       icon={{ name: "magnify" }}
+                                       value={searchValue}
+                                       onChangeText={setSearchValue}
                                        placeholder="Search..."
                                        style={styles.searchInput}
                                     />
@@ -162,7 +160,7 @@ const Select = ({
                                  renderItem={({ item }) => (
                                     <ListItem
                                        chevron={chevron}
-                                       title={item.title}
+                                       title={item.label}
                                        onPress={() => handleSelect(item)}
                                     />
                                  )}

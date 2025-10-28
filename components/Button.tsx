@@ -1,11 +1,12 @@
 import { Keyboard, Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 import { STYLES } from "@/utils/styles";
-const { COLORS, BUTTON } = STYLES;
+import COLORS, { ColorKey } from "@/utils/colors";
+const { BUTTON } = STYLES;
 
 interface ButtonProps extends TouchableOpacityProps {
-   background?: string;
-   color?: string;
+   color?: ColorKey;
+   background?: ColorKey;
    rounded?: number;
    title: string;
    onPress?: () => void;

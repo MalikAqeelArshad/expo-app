@@ -22,7 +22,7 @@ import Select from "@/components/Select";
 import { STYLES } from "@/utils/styles";
 const { COLORS, TEXT, INPUT } = STYLES;
 
-import { MESSAGES } from "@/utils/data";
+import { MESSAGES, OPTIONS } from "@/utils/data";
 
 const Common = () => {
    return (
@@ -40,8 +40,9 @@ const Common = () => {
 
                   <Switch />
 
-                  <Picker icon="apps" items={MESSAGES} />
-                  <Select items={MESSAGES} searchable chevron={false} />
+                  <Picker items={MESSAGES} />
+
+                  <Select options={OPTIONS} chevron={false} searchKey="label" />
 
                   <View style={{ gap: 5, flexDirection: "row", alignItems: "flex-end" }}>
                      <Icon name="home" />
@@ -61,21 +62,21 @@ const Common = () => {
 
                   <Input placeholder="Default Input" />
                   <Input
-                     icon="email"
+                     icon={{ name: "email" }}
                      keyboardType="email-address"
                      placeholder="Default Input with Icon"
                   />
-                  <Input icon="account-tie" placeholder="Default Rounded Input with Icon" rounded />
                   <Input
-                     icon="home"
-                     iconColor="white"
-                     iconBackground="dark"
+                     icon={{ name: "account-tie" }}
+                     placeholder="Default Rounded Input with Icon"
+                     rounded
+                  />
+                  <Input
+                     icon={{ name: "home", color: "white", background: "dark" }}
                      placeholder="Default Input with Icon Background & Color"
                   />
                   <Input
-                     icon="account-tie"
-                     iconColor="white"
-                     iconBackground="dark"
+                     icon={{ name: "account-tie", color: "white", background: "dark" }}
                      placeholder="Default Rounded Input with Icon Background & Color"
                      rounded
                   />
@@ -109,7 +110,7 @@ const Common = () => {
                      <Text style={styles.btnText}>Pressable & Long Pressable</Text>
                   </Pressable>
 
-                  <Select icon="apps" items={MESSAGES} />
+                  <Select options={OPTIONS} icon={{ name: "apps" }} />
 
                   <TextInput
                      clearButtonMode="always"
