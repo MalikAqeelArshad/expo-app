@@ -2,14 +2,27 @@
 
 A professional React Native application built with **Expo SDK 57**, featuring a custom component library, file-based routing with Expo Router, and cross-platform support for iOS, Android, and Web.
 
+## Features
+
+- Cross-platform support (iOS, Android, Web)
+- File-based routing with Expo Router
+- Custom reusable component library
+- TypeScript type safety
+- New Architecture enabled for optimal performance
+- Platform-specific styling (iOS/Android)
+- EAS Build integration for CI/CD
+- OTA updates support
+
 ## Tech Stack
 
-- **Expo SDK 57** — Universal React Native platform
-- **React Native 0.86** — Native mobile framework
-- **React 19.2** — UI library with latest features
-- **Expo Router 57** — File-based routing
-- **TypeScript 6.0** — Type safety
-- **New Architecture** — Enabled for improved performance
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Expo SDK | 57 | Universal React Native platform |
+| React Native | 0.86 | Native mobile framework |
+| React | 19.2 | UI library |
+| Expo Router | 57 | File-based routing |
+| TypeScript | 6.0 | Type safety |
+| Yarn | 1.22 | Package manager |
 
 ## Project Structure
 
